@@ -7,14 +7,27 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:src="@drawable/icon1"/>
+
     <TextView
         android:id="@+id/textView1"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        android:textColor="@android:color/black"
         android:layout_width="match_parent"
-        android:layout_height="100dp"/>
+        android:layout_height="60dp"/>
 
     <TextView
         android:id="@+id/textView2"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:layout_margin="20dp"
         android:layout_width="match_parent"
-        android:layout_height="50dp"/>
+        android:layout_height="150dp"/>
 
 </LinearLayout>

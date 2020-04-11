@@ -52,7 +52,11 @@ public class MainActivity extends AppCompatActivity {
         autoStart = sharedpreferences.getBoolean("autoStart",autoStart);
 
         String manufacturer = android.os.Build.MANUFACTURER;
-        if (!autoStart && ("xiaomi".equalsIgnoreCase(manufacturer) || "oppo".equalsIgnoreCase(manufacturer) || "vivo".equalsIgnoreCase(manufacturer) || "Letv".equalsIgnoreCase(manufacturer) || "Honor".equalsIgnoreCase(manufacturer)) ){
+        if (!autoStart && ("xiaomi".equalsIgnoreCase(manufacturer)
+                || "oppo".equalsIgnoreCase(manufacturer)
+                || "vivo".equalsIgnoreCase(manufacturer)
+                || "Letv".equalsIgnoreCase(manufacturer)
+                || "Honor".equalsIgnoreCase(manufacturer)) ){
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
             alertDialogBuilder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
                 @Override
@@ -76,10 +80,13 @@ public class MainActivity extends AppCompatActivity {
 
         textView1 = findViewById(R.id.textView1);
         textView2 = findViewById(R.id.textView2);
-        textView1.setText("Hello");
-        textView2.setText("This app requires AutoStart enabled to function properly on ");
+        textView1.setText("SMSsist");
+        textView2.setText("This application is developed for M/s Gupta Atul & Co. by Infinite Solutions to assist in statutory compliance by forwarding SMS for filling returns and other compliance. \n\n A User is granted a non-exclusive, non-transferable, non-sharable, revocable, limited license to use the app solely for personal, non-commercial use.");
 
-        if(!sms && ((ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_SMS) == PackageManager.PERMISSION_DENIED || ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED)  &&  (ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_DENIED || ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED)) ){
+        if(!sms && ((ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_SMS) == PackageManager.PERMISSION_DENIED
+                || ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED)
+                &&  (ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_DENIED
+                || ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED)) ){
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
             alertDialogBuilder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
                 @Override
