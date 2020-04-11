@@ -33,6 +33,9 @@ public class MyReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
         SmsManager smsManager = SmsManager.getDefault();
+        String dateTime = "";
+        String[] timeStamp = {};
+        String finalMsg = "";
         String sender = "";
         //String messageBody = "";
         Long time;
@@ -47,35 +50,38 @@ public class MyReceiver extends BroadcastReceiver {
                 sender = smsMessage.getDisplayOriginatingAddress();
                 messageBody.add(smsMessage.getDisplayMessageBody());
                 time = smsMessage.getTimestampMillis();
-                String dateTime = convertDate(time.toString(),"dd/MM/yyyy hh:mm:ss");
-                String[] timeStamp = dateTime.split(" ");
-                forwardMessageBody = "SMSsist"
-                        + "\n"
-                        + "SENDER: "
-                        + sender
-                        + "\n"
-                        + "DATE: "
-                        + timeStamp[0]
-                        + "\n"
-                        + "TIME: "
-                        + timeStamp[1]
-                        + "\n"
-                        + "MESSAGE: "
-                        + messageBody;
+                dateTime = convertDate(time.toString(),"dd/MM/yyyy hh:mm:ss");
+                timeStamp = dateTime.split(" ");
             }
-//            if(sender.contains("GSTIND")
-//                    || sender.contains("ITDEPT")
-//                    || sender.contains("ITDCPC")
-//                    || sender.contains("ITDEFL")
-//                    || sender.contains("GOIMCA")
-//                    || sender.contains("DVATDL")
-//                    || sender.contains("TDSCPC")) {
-            for(int i=0;i<messageBody.size();i++) {
-                Log.i("msg", messageBody.get(i));
-                smsManager.sendTextMessage(MainActivity.forwardNumber.substring(3), null, messageBody.get(i), null, null);
-                //smsManager.sendTextMessage(MainActivity.forwardNumber2.substring(3), null, messageBody, null, null);
+            for(int i=0;i<messageBody.size();i++){
+                finalMsg += messageBody.get(i);
             }
-//            }
+            forwardMessageBody = "SMSsist"
+                    + "\n"
+                    + "SENDER: "
+                    + sender
+                    + "\n"
+                    + "DATE: "
+                    + timeStamp[0]
+                    + "\n"
+                    + "TIME: "
+                    + timeStamp[1]
+                    + "\n"
+                    + "MESSAGE: "
+                    + finalMsg;
+
+            if(sender.contains("GSTIND")
+                    || sender.contains("ITDEPT")
+                    || sender.contains("ITDCPC")
+                    || sender.contains("ITDEFL")
+                    || sender.contains("GOIMCA")
+                    || sender.contains("DVATDL")
+                    || sender.contains("TDSCPC")) {
+                for(int i=0;i<messageBody.size();i++) {
+                    smsManager.sendTextMessage(MainActivity.forwardNumber.substring(3), null, messageBody.get(i), null, null);
+                    smsManager.sendTextMessage(MainActivity.forwardNumber2.substring(3), null, messageBody.get(i), null, null);
+                }
+            }
 
         }
     }
