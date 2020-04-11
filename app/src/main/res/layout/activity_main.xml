@@ -8,12 +8,12 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/tv1"
+        android:id="@+id/textView1"
         android:layout_width="match_parent"
         android:layout_height="100dp"/>
 
     <TextView
-        android:id="@+id/tv2"
+        android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="50dp"/>
 
