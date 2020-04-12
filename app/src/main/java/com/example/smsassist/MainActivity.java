@@ -36,7 +36,7 @@ import static java.lang.Boolean.getBoolean;
 public class MainActivity extends AppCompatActivity {
 
     static TextView textView1, textView2;
-    static String forwardNumber = "
+    //static String forwardNumber = "+
     boolean autoStart = false;
     boolean sms = false;
     SharedPreferences sharedpreferences;
