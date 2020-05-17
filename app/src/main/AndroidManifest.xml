@@ -20,15 +20,21 @@
         <receiver
             android:name=".MyReceiver"
             android:enabled="true"
-            android:exported="true"><intent-filter>
+            android:exported="true">
+            <intent-filter>
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
-        </intent-filter>
+            </intent-filter>
         </receiver>
+
+        <service
+            android:name=".MailService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
-    <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.WRITE_SMS" />
-
     <uses-permission android:name="android.permission.READ_SMS" />
+
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
 
 </manifest>

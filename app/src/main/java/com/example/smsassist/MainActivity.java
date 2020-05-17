@@ -3,40 +3,32 @@ package com.example.smsassist;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.app.NotificationCompat;
 
 import android.Manifest;
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.telephony.SmsManager;
-import android.telephony.SmsMessage;
-import android.util.Log;
+import android.widget.FrameLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.getbase.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import static java.lang.Boolean.getBoolean;
 
 public class MainActivity extends AppCompatActivity {
 
     static TextView textView1, textView2;
-    //static String forwardNumber = "+
+    static ArrayList<String> destinationNumbers;
+    static ArrayList<String> sourceNumbers;
+    FloatingActionButton sourceNumbersFAB, destinationNumbersFAB;
+    FrameLayout container;
+    //static String forwardNumber = "";
+    //static String forwardNumber2 = "";
     boolean autoStart = false;
     boolean sms = false;
     SharedPreferences sharedpreferences;
@@ -47,9 +39,24 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        getSupportFragmentManager().beginTransaction().add(R.id.container, new SplashScreenOneFragment()).addToBackStack(null).commit();
+
+
+        sourceNumbersFAB = findViewById(R.id.sourceNumbersFAB);
+        destinationNumbersFAB = findViewById(R.id.destinationNumbersFAB);
+
+        destinationNumbers = new ArrayList<>();
+        sourceNumbers = new ArrayList<>();
+
         sharedpreferences = getPreferences(Context.MODE_PRIVATE);
         editor = sharedpreferences.edit();
         autoStart = sharedpreferences.getBoolean("autoStart",autoStart);
+        //destinationNumbers = sharedpreferences.getStringSet("forwardNumbers",forwardNumbers);
+
+        destinationNumbers.add("");
+        destinationNumbers.add("");
+        sourceNumbers.add("");
+        sourceNumbers.add("");
 
         String manufacturer = android.os.Build.MANUFACTURER;
         if (!autoStart && ("xiaomi".equalsIgnoreCase(manufacturer)
@@ -78,10 +85,10 @@ public class MainActivity extends AppCompatActivity {
             alertDialog.show();
         }
 
-        textView1 = findViewById(R.id.textView1);
-        textView2 = findViewById(R.id.textView2);
-        textView1.setText("SMSsist");
-        textView2.setText("to assist in statutory compliance by forwarding SMS for filling returns and other compliance. \n\n A User is granted a non-exclusive, non-transferable, non-sharable, revocable, limited license to use the app solely for personal, non-commercial use.");
+//        textView1 = findViewById(R.id.textView1);
+//        textView2 = findViewById(R.id.textView2);
+//        textView1.setText("SMSsist");
+//        textView2.setText("to assist in statutory compliance by forwarding SMS for filling returns and other compliance. \n\n A User is granted a non-exclusive, non-transferable, non-sharable, revocable, limited license to use the app solely for personal, non-commercial use.");
 
         if(!sms && ((ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_SMS) == PackageManager.PERMISSION_DENIED
                 || ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED)
